@@ -2,30 +2,20 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, MessageCircle, Heart, Share2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
-
 const LandingPage = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container flex h-16 items-center justify-between">
-          <div className="font-bold text-2xl bg-gradient-primary bg-clip-text text-transparent">
+          <div className="font-bold text-2xl bg-gradient-primary bg-clip-text text-transparent rounded-sm bg-blue-800">
             Champreach
           </div>
           <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              className="text-foreground hover:text-primary"
-              onClick={() => navigate("/auth")}
-            >
+            <Button variant="ghost" className="text-foreground hover:text-primary" onClick={() => navigate("/auth")}>
               Sign In
             </Button>
-            <Button 
-              variant="premium"
-              onClick={() => navigate("/auth")}
-            >
+            <Button variant="premium" onClick={() => navigate("/auth")}>
               Get Started
               <ArrowRight className="w-4 h-4" />
             </Button>
@@ -54,12 +44,7 @@ const LandingPage = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  variant="hero" 
-                  size="xl" 
-                  className="animate-scale-in"
-                  onClick={() => navigate("/auth")}
-                >
+                <Button variant="hero" size="xl" className="animate-scale-in" onClick={() => navigate("/auth")}>
                   Start Your Journey
                   <ArrowRight className="w-5 h-5" />
                 </Button>
@@ -87,11 +72,7 @@ const LandingPage = () => {
 
             <div className="relative animate-slide-up">
               <div className="relative">
-                <img 
-                  src={heroImage} 
-                  alt="Champreach Community" 
-                  className="rounded-2xl shadow-elegant w-full h-auto"
-                />
+                <img src={heroImage} alt="Champreach Community" className="rounded-2xl shadow-elegant w-full h-auto" />
                 <div className="absolute inset-0 bg-gradient-primary/10 rounded-2xl"></div>
               </div>
             </div>
@@ -112,39 +93,29 @@ const LandingPage = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: Users,
-                title: "Premium Networking",
-                description: "Connect with like-minded professionals and build lasting relationships."
-              },
-              {
-                icon: MessageCircle,
-                title: "Real-time Messaging",
-                description: "Instant communication with advanced chat features and media sharing."
-              },
-              {
-                icon: Heart,
-                title: "Meaningful Interactions",
-                description: "Engage authentically with content that matters to your community."
-              },
-              {
-                icon: Share2,
-                title: "Smart Sharing",
-                description: "Share your thoughts, moments, and achievements with precision privacy controls."
-              }
-            ].map((feature, index) => (
-              <div 
-                key={index} 
-                className="group p-6 rounded-xl border border-border bg-card hover:bg-accent/50 transition-all duration-300 hover:shadow-premium"
-              >
+            {[{
+            icon: Users,
+            title: "Premium Networking",
+            description: "Connect with like-minded professionals and build lasting relationships."
+          }, {
+            icon: MessageCircle,
+            title: "Real-time Messaging",
+            description: "Instant communication with advanced chat features and media sharing."
+          }, {
+            icon: Heart,
+            title: "Meaningful Interactions",
+            description: "Engage authentically with content that matters to your community."
+          }, {
+            icon: Share2,
+            title: "Smart Sharing",
+            description: "Share your thoughts, moments, and achievements with precision privacy controls."
+          }].map((feature, index) => <div key={index} className="group p-6 rounded-xl border border-border bg-card hover:bg-accent/50 transition-all duration-300 hover:shadow-premium">
                 <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <feature.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground text-sm">{feature.description}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -159,12 +130,7 @@ const LandingPage = () => {
             <p className="text-xl text-muted-foreground">
               Join thousands of users who have already discovered the power of premium social networking.
             </p>
-            <Button 
-              variant="premium" 
-              size="xl" 
-              className="animate-scale-in"
-              onClick={() => navigate("/auth")}
-            >
+            <Button variant="premium" size="xl" className="animate-scale-in" onClick={() => navigate("/auth")}>
               Join Champreach Today
               <ArrowRight className="w-5 h-5" />
             </Button>
@@ -188,8 +154,6 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default LandingPage;
