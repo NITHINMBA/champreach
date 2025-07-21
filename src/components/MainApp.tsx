@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAuth } from "@/hooks/useAuth";
+import { useProfile } from "@/hooks/useProfile";
 import { 
   Home, 
   Users, 
@@ -13,10 +15,13 @@ import {
   MessageSquare, 
   Share2,
   MoreHorizontal,
-  Settings
+  Settings,
+  LogOut
 } from "lucide-react";
 
 const MainApp = () => {
+  const { user, signOut } = useAuth();
+  const { profile } = useProfile();
   const [activeTab, setActiveTab] = useState("home");
 
   const posts = [
@@ -91,10 +96,19 @@ const MainApp = () => {
               <Settings className="w-5 h-5" />
             </Button>
 
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={signOut}
+              className="text-muted-foreground hover:text-destructive"
+            >
+              <LogOut className="w-5 h-5" />
+            </Button>
+
             <Avatar className="w-8 h-8 ml-2">
-              <AvatarImage src="" />
+              <AvatarImage src={profile?.avatar_url || undefined} />
               <AvatarFallback className="bg-primary text-primary-foreground text-sm">
-                JD
+                {profile?.full_name?.charAt(0) || user?.email?.charAt(0) || 'U'}
               </AvatarFallback>
             </Avatar>
           </div>
@@ -108,15 +122,15 @@ const MainApp = () => {
             <Card className="p-6 space-y-4">
               <div className="text-center">
                 <Avatar className="w-20 h-20 mx-auto mb-4">
-                  <AvatarImage src="" />
+                  <AvatarImage src={profile?.avatar_url || undefined} />
                   <AvatarFallback className="bg-primary text-primary-foreground text-lg">
-                    JD
+                    {profile?.full_name?.charAt(0) || user?.email?.charAt(0) || 'U'}
                   </AvatarFallback>
                 </Avatar>
-                <h3 className="font-semibold">John Doe</h3>
-                <p className="text-sm text-muted-foreground">@johndoe</p>
+                <h3 className="font-semibold">{profile?.full_name || 'User'}</h3>
+                <p className="text-sm text-muted-foreground">@{profile?.username || 'username'}</p>
                 <p className="text-xs text-muted-foreground mt-2">
-                  Premium Member since 2024
+                  Member since {new Date(profile?.created_at || '').getFullYear() || '2024'}
                 </p>
               </div>
               
@@ -141,16 +155,18 @@ const MainApp = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* Post Composer */}
             <Card className="p-6">
-              <div className="flex gap-4">
+                <div className="flex gap-4">
                 <Avatar className="w-10 h-10">
-                  <AvatarImage src="" />
+                  <AvatarImage src={profile?.avatar_url || undefined} />
                   <AvatarFallback className="bg-primary text-primary-foreground">
-                    JD
+                    {profile?.full_name?.charAt(0) || user?.email?.charAt(0) || 'U'}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
                   <div className="bg-secondary/50 rounded-lg p-4 mb-4">
-                    <p className="text-muted-foreground">What's on your mind, John?</p>
+                    <p className="text-muted-foreground">
+                      What's on your mind, {profile?.full_name?.split(' ')[0] || 'there'}?
+                    </p>
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="text-sm text-muted-foreground">
